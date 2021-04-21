@@ -1,24 +1,28 @@
 package com.project.controller;
 
-import java.util.Base64;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.modal.AccessTokenModel;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/controller1")
+@RequestMapping(value = ControllerOne.API.ROOT)
 public class ControllerOne {
 	
-	@GetMapping("/response")
-	public String getResponse(@RequestHeader("accesstoken") String accessToken) throws JsonMappingException, JsonProcessingException {
+	@NoArgsConstructor(access = AccessLevel.PRIVATE)
+	public class API{
+		
+		public static final String ROOT = "/controller1"; 
+		
+		public static final String AUTH = "/auth";
+		
+		public static final String RESPONSE = "/response";
+		
+	}
+	@GetMapping(API.RESPONSE)
+	public String getResponse(){
 
 		return "Success";
 	}

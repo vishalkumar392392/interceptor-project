@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.controller.ControllerOne;
 import com.project.modal.AccessTokenModel;
 import com.project.repository.InterceptorRepository;
 
@@ -26,6 +27,12 @@ public class Log1Interceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		String root = ControllerOne.API.ROOT + ControllerOne.API.AUTH;
+		
+		if(root.equalsIgnoreCase(request.getRequestURI())) {
+			return true;
+		}
+		System.out.println(root);
 		System.out.println(request.getRequestURI());
 		byte[] decodedBytes = Base64.getDecoder().decode(request.getHeader("accesstoken"));
 		String decodedString = new String(decodedBytes);
